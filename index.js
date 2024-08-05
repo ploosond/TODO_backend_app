@@ -22,7 +22,7 @@ app.post('/create', (req, res) => {
   fs.writeFile(
     `${path.join(__dirname, 'files')}/${req.body.title
       .split(' ')
-      .join('_')}.txt`,
+      .join('')}.txt`,
     req.body.details,
     (err) => {
       res.redirect('/');
@@ -39,6 +39,24 @@ app.get('/files/:filename', (req, res) => {
         filename: req.params.filename,
         data: data,
       });
+    }
+  );
+});
+
+app.get('/edit/:filename', (req, res) => {
+  res.render('edit', {
+    filename: req.params.filename,
+  });
+});
+
+app.post('/edit', (req, res) => {
+  console.log(req.params);
+  fs.rename(
+    `${path.join(__dirname, 'files')}/${req.body.previous}`,
+    `${path.join(__dirname, 'files')}/${req.body.new}`,
+    (err) => {
+      if (err) console.log(err);
+      res.redirect('/');
     }
   );
 });

@@ -32,12 +32,13 @@
       <div class="tasks flex gap-3 flex-wrap p-10">
         <% if(files.length > 0) { %> <% files.forEach(function(value) { %>
         <div class="task min-w-72 px-3 py-4 bg-zinc-800 rounded-md">
-          <h1 class="text-white text-3xl tracking-tighter">
-            <%= value.slice(0, -4).replace(/_/g, ' ') %>
-          </h1>
-          <a class="text-blue-500 inline-block mt-3" href="/files/<%= value %>"
-            >Read More.</a
-          >
+          <h1 class="text-white text-3xl tracking-tighter"><%= value %></h1>
+          <div class="flex w-full justify-between items-center mt-3">
+            <a class="text-blue-500 inline-block" href="/files/<%= value %>"
+              >Read More.</a
+            >
+            <a class="text-zinc-600" href="/edit/<%= value %>">edit filename</a>
+          </div>
         </div>
         <% }) %> <% } else { %>
         <h3 class="text-zinc-600">no task yet.</h3>
